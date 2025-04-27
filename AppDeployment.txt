@@ -1,0 +1,12 @@
+-During the development phase, a local/private database is used.
+
+-This local database is only accessible to developers.
+
+-For deployment, a remote/public database must be used.
+
+-A remote database allows external users to access their own data.
+
+-This makes the app accessible outside the local environment.
+
+-Performance optimization: Remote databases should be optimized for scalability and performance, especially when handling many users at once.
+
