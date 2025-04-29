@@ -16,3 +16,7 @@ server.get("/hello", function (req, res) {
 server.listen(port, function () {
     console.log("Express listening on " + port);
 });
+
+server.use(express.static('public_html'))
+
+
