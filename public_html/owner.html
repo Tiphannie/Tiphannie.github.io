@@ -208,11 +208,55 @@ textarea {
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+
 }
 
 .contact-form button[type="submit"]:hover {
   transform: scale(1.1);
   transition: transform 0.3s ease-in-out;
+}
+
+.custum-file-upload2{
+  height: 50px;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #cacaca;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+}
+
+.custum-file-upload2 .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload2 .icon svg {
+  height: 80px;
+  fill: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload2 .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload2 .text span {
+  font-weight: 400;
+  color: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload2 input {
+  display: none;
 }
 
 
@@ -245,17 +289,25 @@ textarea {
       <table style="margin: auto; text-align: center;">
 
 
-        <tr>
+        <tr style="padding: 20px;">
           <div class="contact-form">
-            <span class="heading">Contact Us</span>
+            <span class="heading">Describe Speisemenü</span>
             <form>
               <label for="name">Name:</label>
-              <input type="text" required="">
+              <input type="text" style="width: 80%;" required="">
               <label for="email">Email:</label>
-              <input type="email" id="email" name="email" required="">
+              <input type="email" id="email" style="width: 80%;" name="email" required="">
               <label for="message">Message:</label>
-              <textarea id="message" name="message" required=""></textarea>
+              <textarea id="message" name="message" style="width: 85%" required=""></textarea>
               <button type="submit">Submit</button>
+              <label class="custum-file-upload2" for="file">
+                <div class="icon">
+                </div>
+                <div class="text">
+                  <span>Click to upload an image or video</span>
+                </div>
+                <input type="file" id="file">
+              </label>
             </form>
           </div>
        </tr>
