@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<style>
+    .custum-file-upload {
+  height: 150px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #cacaca;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+  height: 80px;
+  fill: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .text span {
+  font-weight: 400;
+  color: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload input {
+  display: none;
+}
+
+
+/* From Uiverse.io by TheAbieza */ 
+.container {
+  width: fit-content;
+  gap: 10px
+}
+
+.folder {
+  width: min-content;
+  margin: auto;
+/*   animation: float 2s infinite linear; */
+}
+
+.folder .top {
+  background-color: #FF8F56;
+  width: 60px;
+  height: 12px;
+  border-top-right-radius: 10px;
+}
+
+.folder .bottom {
+  background-color: #FFCE63;
+  width: 100px;
+  height: 70px;
+  box-shadow: 5px 5px 0 0 #283149;
+  border-top-right-radius: 8px;
+}
+
+
+
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #6dd5ed, #2193b0);
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.folder {
+  position: relative;
+  animation: float 2.5s infinite ease-in-out;
+  transition: transform 0.3s ease;
+}
+
+.folder:hover {
+  transform: scale(1.05);
+}
+
+.folder .top {
+  background: linear-gradient(135deg, #ff9a56, #ff6f56);
+  width: 80px;
+  height: 20px;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 2;
+}
+
+.folder .bottom {
+  background: linear-gradient(135deg, #ffe563, #ffc663);
+  width: 120px;
+  height: 80px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 0 10px 10px 10px;
+  position: relative;
+  top: -10px;
+}
+
+.custom-file-upload {
+  font-size: 1.1em;
+  color: #ffffff;
+  text-align: center;
+  margin-top: 20px;
+  padding: 15px 25px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: inline-block;
+  width: 120px;
+}
+
+.custom-file-upload:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+
+
+
+.contact-form {
+  background-color: #f2f2f2;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact-form label {
+  color: black;
+}
+
+.contact-form .heading {
+  font-size: 24px;
+  color: black;
+  ;
+  margin-bottom: 12px;
+  font-weight: bold;
+  display: block;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-bottom: 10px;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+  width: 200px;
+}
+
+.contact-form input, .contact-form textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 5px #ff6384;
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.contact-form button[type="submit"] {
+  background-color: #ff6384;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.contact-form button[type="submit"]:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+
+
+</style>
+
+<body style="background-color: rgb(37, 37, 37);">
+
+  <div style="width: 80%; height: 5%; background-color: #DEDAD5; margin: auto; border-radius: 15px; display: flex; align-items: center;">
+    <div style="width: 30%; display: flex; justify-content: center; align-items: center; border-radius: 15px;">
+      <img src="https://original-berliner-doener.com/wp-content/uploads/2025/01/Logo-1-1024x1024.png" style="width: 50%;">
+    </div>
+    
+    <div style="width: 70%; display: flex; align-items: center;">
+      <h1 style="margin-left: 20px;">Doner owner</h1>
+    </div>
+  </div>
+
+    <br>
+    <br>
+    <br>
+  
+    <div style="width: 40%; background-color: #DEDAD5; margin: auto; border-radius: 15px; padding: 20px; text-align: center;">
+  
+      <!-- Überschrift zentriert -->
+      <h2 style="margin-top: 0;">Hallo</h2>
+    
+      <!-- Tabelle -->
+      <table style="margin: auto; text-align: center;">
+
+
+        <tr>
+          <div class="contact-form">
+            <span class="heading">Contact Us</span>
+            <form>
+              <label for="name">Name:</label>
+              <input type="text" required="">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required="">
+              <label for="message">Message:</label>
+              <textarea id="message" name="message" required=""></textarea>
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+       </tr>
+
+        <tr>
+          <th style="padding: 20px;">
+            <label class="custum-file-upload" for="file">
+              <div class="icon">
+                <!-- SVG hier -->
+              </div>
+              <div class="text">
+                <span>Click to upload an image or video</span>
+              </div>
+              <input type="file" id="file">
+            </label>
+          </th>
+    
+          <th style="padding: 20px;">
+            <div class="container">
+              <div class="folder">
+                <div class="top"></div>
+                <div class="bottom"></div>
+              </div>
+              <label class="custom-file-upload">
+                <input class="title" type="file" />
+                Edit photos and videos
+              </label>
+            </div>
+          </th>
+        </tr>
+        
+      </table>
+    
+    </div>
+    
+  
+
+</body>
+</html>
