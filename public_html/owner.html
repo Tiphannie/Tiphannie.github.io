@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script src="handeleBars.js"></script>
 
 </head>
 
@@ -340,8 +342,25 @@ textarea {
         </tr>
         
       </table>
-    
     </div>
+
+    <script type="text/x-handlebars-template" id="template">
+      <h1>{{title}}</h1>
+      <ul>
+        {{#each list}}
+          <li>{{this.name}}</li>
+        {{/each}}
+      </ul>
+      <textarea name="message" id="message" placeholder="Type your message..." rows="5" cols="40"></textarea>
+    </script>
+    
+    <!-- Output -->
+    <div id="output"></div>
+    
+    <!-- Button außerhalb -->
+    <button onclick="write_admin()">
+      Write Admin
+    </button>
     
   
 
