@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar */
+  nav {
+    background-color: #2e2e2e;
+    color: white;
+    width: 200px;
+    padding: 20px;
+  }
+  
+  nav h2 {
+    margin-top: 0;
+  }
+  
+  nav a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+  }
+  
+  nav a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Main content */
+  main {
+    flex: 1;
+    padding: 30px;
+    background-color: #f8f8f8;
+  }
+  
+  /* Header */
+  header {
+    background-color: #f79232;
+    color: #222;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+  }
+  
+  header .user-icon {
+    font-size: 1.5em;
+  }
+  
+  /* Form */
+  form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #ccc;
+  }
+  
+  form label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: bold;
+  }
+  
+  .stars {
+    color: gold;
+    font-size: 20px;
+  }
+  
+  textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    resize: vertical;
+  }
+  
+  button {
+    background-color: #f79232;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #e5831f;
+  }
+  

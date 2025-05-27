@@ -1,0 +1,12 @@
+<aside class="sidebar">
+  <div class="logo">☰</div>
+  <form class="search-form">
+    <input type="text" placeholder="Search...">
+    <button type="submit">🔍</button>
+  </form>
+  <div class="item-list">
+    {{#each items}}
+      <div class="item">{{this}}</div>
+    {{/each}}
+  </div>
+</aside>
