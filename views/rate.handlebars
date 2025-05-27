@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Döner Bewertung</title>
+  <link rel="stylesheet" href="/css/rate_styles.css" />
+</head>
+<body>
+
+  <div class="main-container">
+    <div class="header">
+      <div class="header-title">Bewerte "{{restaurantName}}"</div>
+      <div class="account-icon">👤</div>
+    </div>
+
+    <div class="content">
+      {{#each categories}}
+        <div class="rating-category">
+          <span>{{this.label}}:</span>
+          <span class="stars">★★★★★</span>
+        </div>
+      {{/each}}
+
+      <div class="comment-section">
+        <form action="/rate/{{restaurantId}}" method="POST">
+          <label for="comment"><strong>Kommentar:</strong></label>
+          <textarea id="comment" name="comment" placeholder="Schreib deinen Eindruck hier rein..."></textarea>
+          <button class="submit-btn" type="submit">Absenden</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <h3>Menü</h3>
+    <ul>
+      <li>Start</li>
+      <li>Bewerten</li>
+      <li>Meine Bewertungen</li>
+      <li>Logout</li>
+    </ul>
+  </div>
+
+</body>
+</html>

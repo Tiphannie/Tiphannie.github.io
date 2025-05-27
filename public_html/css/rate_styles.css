@@ -1,0 +1,158 @@
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 180px;
+  background-color: #333;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+  position: fixed;
+  right: 0;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 16px 0;
+  cursor: pointer;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Main container */
+.main-container {
+  flex: 1;
+  margin-right: 180px;
+}
+
+.header {
+  background-color: #f4a259;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.account-icon {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+/* Content box */
+.content {
+  padding: 32px 24px;
+  max-width: 700px;
+  margin: auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Restaurant list styles */
+ul.restaurant-list {
+  padding: 0;
+  list-style: none;
+}
+
+ul.restaurant-list li small {
+  color: #666;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-left: 4px;
+}
+
+ul.restaurant-list li {
+  padding: 12px 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+ul.restaurant-list li:last-child {
+  border-bottom: none;
+}
+
+ul.restaurant-list li a {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+ul.restaurant-list li a:hover {
+  color: #f4a259;
+  text-decoration: underline;
+}
+
+/* Rating categories */
+.rating-category {
+  margin: 16px 0;
+}
+
+.rating-category span {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.stars {
+  color: #f1c40f;
+  font-size: 1.2rem;
+}
+
+/* Comment section */
+.comment-section {
+  margin-top: 24px;
+}
+
+.comment-section textarea {
+  width: 100%;
+  height: 100px;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+}
+
+/* Submit button */
+.submit-btn {
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: #f4a259;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.submit-btn:hover {
+  background-color: #e39440;
+}

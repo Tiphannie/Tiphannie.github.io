@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Restaurants bewerten</title>
+  <link rel="stylesheet" href="/css/rate_styles.css" />
+</head>
+<body>
+
+  <div class="main-container">
+    <div class="header">
+      <div class="header-title">Döner Restaurants</div>
+      <div class="account-icon">👤</div>
+    </div>
+
+    <div class="content">
+      <h2>Wähle ein Restaurant zum Bewerten</h2>
+      <ul class="restaurant-list">
+        {{#each restaurants}}
+          <li>
+            <a href="/rate/{{this.id}}">{{this.name}}</a><br/>
+            <small>{{this.description}}</small>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <h3>Menü</h3>
+    <ul>
+      <li><a href="/">Start</a></li>
+      <li><a href="/restaurants">Bewerten</a></li>
+      <li>Meine Bewertungen</li>
+      <li>Logout</li>
+    </ul>
+  </div>
+
+</body>
+</html>
