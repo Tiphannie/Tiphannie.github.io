@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import WriteAdmin from "./WriteAdmin";
 
 export default function EditStorePage() {
   const [file, setFile] = useState<File | null>(null);
@@ -70,6 +71,10 @@ export default function EditStorePage() {
           <br />
           <button type="submit">Submit</button>
         </form>
+      </div>
+
+      <div>
+        <WriteAdmin />
       </div>
     </div>
   );
