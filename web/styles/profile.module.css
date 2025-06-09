@@ -1,0 +1,60 @@
+
+  /* So as not to waste time, I asked ChatGPT to give me a Minimal, mobile-first styling for restaurant profile pages */
+
+  :root{
+    --brand:#c4122f; --brand-dark:#911021;
+    --text:#222; --muted:#666; --bg:#fafafa; --border:#e0e0e0;
+    --radius:.4rem; --shadow:0 1px 3px rgba(0,0,0,.08);
+    font-size:16px;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+
+  body{
+    margin:0; padding:0 1rem; max-width:60rem;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.6; color:var(--text); background:var(--bg);
+    scroll-behavior:smooth;
+  }
+
+  header{
+    text-align:center; padding:2.5rem 1rem 2rem;
+    border-bottom:1px solid var(--border);
+  }
+  header h1{margin:.2rem 0 .3rem;font-size:2rem;letter-spacing:-.02em;}
+  header .stars{margin:0 0 .6rem;font-size:1.2rem;color:goldenrod;}
+  header address{font-style:normal;color:var(--muted);font-size:.95rem;}
+
+  nav.tabs{
+    display:flex; gap:.25rem; overflow-x:auto;
+    padding:.25rem 0 .5rem; border-bottom:1px solid var(--border);
+    -webkit-overflow-scrolling:touch;
+  }
+  nav.tabs a{
+    flex:1 1 auto; text-align:center; padding:.6rem .8rem;
+    text-decoration:none; font-weight:500; color:var(--brand);
+    border-radius:var(--radius) var(--radius) 0 0; white-space:nowrap;
+    transition:background .2s;
+  }
+  nav.tabs a:is(:hover,:focus){background:var(--brand);color:#fff;}
+  nav.tabs a:target,
+  nav.tabs a[aria-current="page"]{background:var(--brand-dark);color:#fff;}
+
+  main{padding:1.5rem 0 3rem;}
+  main h2{
+    margin:2.2rem 0 .8rem;font-size:1.4rem;
+    border-bottom:2px solid var(--brand);display:inline-block;padding-bottom:.2rem;
+  }
+  main ul{list-style:none;padding:0;margin:0;}
+  main li{padding:.4rem 0;border-bottom:1px dotted var(--border);}
+  article{padding:.8rem 0 1.2rem;border-bottom:1px solid var(--border);}
+  article h3{margin:.2rem 0 .5rem;font-size:1.1rem;}
+  iframe{border:none;border-radius:var(--radius);box-shadow:var(--shadow);background:#ccc;}
+
+  footer{text-align:center;padding:2rem 0;font-size:.85rem;
+         color:var(--muted);border-top:1px solid var(--border);}
+
+  @media (min-width:700px){
+    body{padding:0 2rem;} header h1{font-size:2.4rem;}
+    nav.tabs{justify-content:center;} nav.tabs a{max-width:12rem;}
+  }
+ 
