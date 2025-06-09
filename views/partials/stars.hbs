@@ -1,0 +1,8 @@
+{{!-- expects: rating --}}
+<span class="stars">
+  {{#each (range 1 5)}}
+    {{#if (lte this ../rating)}}★{{else}}☆{{/if}}
+  {{/each}}
+  {{rating}}
+</span>
+
