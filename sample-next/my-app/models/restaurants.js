@@ -2,15 +2,16 @@ const mongoose = require("mongoose");
 
 mongoose.connect("mongodb://localhost:27018/myapp");
 
-const DishSchema = new mongoose.Schema({
-  title: String,
-  ingredients: String,
+const RestauramtsSchema = new mongoose.Schema({
+  id: String,
+  name: String,
+  description: String,
 });
 
-const Dish = mongoose.model("Dish", DishSchema);
+const Restauramts = mongoose.model("Restaurants", RestauramtsSchema);
 
-Dish.find().then((dishes) => {
+Restauramts.find().then((Restauramts) => {
   console.log("Alle Restaurants:");
-  console.log(dishes);
+  console.log(Restauramts);
   mongoose.connection.close();
 });
