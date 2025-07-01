@@ -1,22 +1,35 @@
 "use client";
 import { useEffect, useState } from "react";
+import mongoose from 'mongoose';
 
-type Dish = {
+
+export type Dish = {
   _id: string;
   title: string;
   ingredients: string;
 };
+const DishSchema = new mongoose.Schema({
+  title: String,
+  ingredients: String,
+});
 
-export default function EditStorePage() {
-  const [file, setFile] = useState<File | null>(null);
-  const [dishes, setDishes] = useState<Dish[]>([]);
+const Dishes = mongoose.models.Dishes || mongoose.model('Dishes', DishSchema);
 
-  useEffect(() => {
-    fetch("/api/dishes")
-      .then((res) => res.json())
-      .then((data) => setDishes(data));
-  }, []);
+export const getStaticProps = async () => {
+  // Connect to MongoDB (reuse your connection logic if possible)
+  await mongoose.connect('mongodb://localhost:27017/myapp');
 
+  const dishes = await Dishes.find().lean();
+
+  return {
+    props: {
+      dishes: JSON.parse(JSON.stringify(dishes)), // remove mongoose document props
+    },
+    revalidate: 10,
+  };
+};
+export default function EditStorePage({ dishes }: { dishes: Dish[] }) {
+  
   return (
     <div style={{ backgroundColor: "#252525", minHeight: "100vh", padding: "2rem", color: "black" }}>
       {/* Header */}
@@ -76,7 +89,7 @@ export default function EditStorePage() {
             <span>Bild hochladen</span>
             <input
               type="file"
-              onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+              //onChange={(e) => setFile(e.target.files?.[0] ?? null)}
               style={{ display: "none" }}
             />
           </label>

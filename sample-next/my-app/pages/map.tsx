@@ -1,6 +1,30 @@
 import React from "react";
+import { Dish } from "./edit-store"; 
+import mongoose from 'mongoose';
 
-export default function DonerMapPage() {
+
+const DishSchema = new mongoose.Schema({
+  title: String,
+  ingredients: String,
+});
+
+const Dishes = mongoose.models.Dishes || mongoose.model('Dishes', DishSchema);
+
+export const getStaticProps = async () => {
+  // Connect to MongoDB (reuse your connection logic if possible)
+  await mongoose.connect('mongodb://localhost:27017/myapp');
+
+  const dishes = await Dishes.find().lean();
+
+  return {
+    props: {
+      dishes: JSON.parse(JSON.stringify(dishes)), // remove mongoose document props
+    },
+    revalidate: 10,
+  };
+};
+
+export default function DonerMapPage({ dishes }: { dishes: Dish[] }) {
   return (
     <div className="flex min-h-screen bg-gray-50 text-black">
       {/* Sidebar */}
@@ -17,9 +41,11 @@ export default function DonerMapPage() {
           </button>
         </div>
         <ul className="space-y-1 text-sm">
-          <li>Doner 1</li>
-          <li>Doner 2</li>
-          <li>Doner 3</li>
+          {dishes.map((dish) => (
+            <li key={dish.title} style={{ marginBottom: "1rem" }}>
+              <strong>{dish.title}</strong>: {dish.ingredients}
+            </li>
+          ))}
         </ul>
       </aside>
 
@@ -37,3 +63,4 @@ export default function DonerMapPage() {
     </div>
   );
 }
+
