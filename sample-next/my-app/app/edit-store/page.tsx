@@ -1,12 +1,25 @@
 "use client";
-import { useState } from "react";
-import WriteAdmin from "./WriteAdmin";
+import { useEffect, useState } from "react";
+
+type Dish = {
+  _id: string;
+  title: string;
+  ingredients: string;
+};
 
 export default function EditStorePage() {
   const [file, setFile] = useState<File | null>(null);
+  const [dishes, setDishes] = useState<Dish[]>([]);
+
+  useEffect(() => {
+    fetch("/api/dishes")
+      .then((res) => res.json())
+      .then((data) => setDishes(data));
+  }, []);
 
   return (
-    <div style={{ backgroundColor: "#252525", minHeight: "100vh", padding: "2rem" }}>
+    <div style={{ backgroundColor: "#252525", minHeight: "100vh", padding: "2rem", color: "black" }}>
+      {/* Header */}
       <div
         style={{
           width: "80%",
@@ -26,13 +39,13 @@ export default function EditStorePage() {
           />
         </div>
         <div style={{ width: "70%" }}>
-          <h1 style={{ marginLeft: "20px" }}>Doner owner</h1>
+          <h1 style={{ marginLeft: "20px" }}>Doner Owner Dashboard</h1>
         </div>
       </div>
 
       <br />
-      <br />
 
+      {/* Formular */}
       <div
         style={{
           width: "40%",
@@ -43,24 +56,24 @@ export default function EditStorePage() {
           textAlign: "center",
         }}
       >
-        <h2>Edit your store</h2>
+        <h2>Neues Gericht hinzufügen</h2>
 
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            alert("Submitted!");
+            alert("Noch nicht implementiert");
           }}
         >
-          <label>Name:</label>
+          <label>Name des Gerichts:</label>
           <input type="text" style={{ width: "80%" }} required />
 
           <br />
-          <label>Ingredients:</label>
+          <label>Zutaten:</label>
           <textarea style={{ width: "85%", height: "80px" }} required />
 
           <br />
           <label className="custum-file-upload2">
-            <span>Click to upload an image or video</span>
+            <span>Bild hochladen</span>
             <input
               type="file"
               onChange={(e) => setFile(e.target.files?.[0] ?? null)}
@@ -69,12 +82,30 @@ export default function EditStorePage() {
           </label>
 
           <br />
-          <button type="submit">Submit</button>
+          <button type="submit">Gericht speichern</button>
         </form>
       </div>
 
-      <div>
-        <WriteAdmin />
+      <br />
+
+      {/* Gerichte anzeigen */}
+      <div
+        style={{
+          backgroundColor: "#DEDAD5",
+          margin: "2rem auto",
+          padding: "1rem",
+          borderRadius: "10px",
+          width: "60%",
+        }}
+      >
+        <h2>Alle Gerichte</h2>
+        <ul>
+          {dishes.map((dish) => (
+            <li key={dish._id} style={{ marginBottom: "1rem" }}>
+              <strong>{dish.title}</strong>: {dish.ingredients}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
