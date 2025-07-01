@@ -16,7 +16,7 @@ services:
   mongodb:
     image: mongo:7
     ports:
-      - "27018:27017"  # Nutze einen anderen Port außen!
+      - "27017:27017"  # Nutze einen anderen Port außen!
     volumes:
       - mongo-data:/data/db
 
