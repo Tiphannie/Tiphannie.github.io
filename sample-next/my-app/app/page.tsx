@@ -7,6 +7,9 @@ export default function HomePage() {
       <p>
         <Link href="/edit-store">Go to /edit-store</Link>
       </p>
+      <p>
+        <Link href="/map">Go to /map</Link>
+      </p>
     </main>
   );
 }
