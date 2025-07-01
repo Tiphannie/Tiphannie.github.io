@@ -17,6 +17,26 @@ async function seed() {
     { title: "Döner Tüte", ingredients: "Chipstüte mit Dönerfleisch, Sauce, Salat" },
   ]);
 
+  await Restaurants.deleteMany({});
+
+  await Restaurants.create([
+    {
+      "id": "1",
+      "name": "ALLIM Döner Restaurant",
+      "description": "Klassisch Berliner Hack und Hänchen Döner mit frischen Zutaten und hausgemachten Soßen in Südberlin."
+    },
+    {
+      "id": "2",
+      "name": "Mustafas Gemüse Kebab",
+      "description": "Miese Touri Falle und Mid Gemüse Döner"
+    },
+    {
+      "id": "3",
+      "name": "Hamdi Baba Restaurant",
+      "description": "Traditionell Berliner Hack Döner mit mehreren Filialen in Berlin."
+    }
+  ]);
+
   console.log("Seed erfolgreich abgeschlossen.");
   mongoose.connection.close();
 }

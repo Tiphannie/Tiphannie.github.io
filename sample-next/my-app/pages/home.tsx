@@ -10,6 +10,9 @@ export default function HomePage() {
       <p>
         <Link href="/map">Go to /map</Link>
       </p>
+      <p>
+        <Link href="/restaurants">Go to the list of restaurants to rate</Link>
+      </p>
     </main>
   );
 }
