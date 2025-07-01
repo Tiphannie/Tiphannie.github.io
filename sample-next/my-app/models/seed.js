@@ -13,12 +13,19 @@ const RestaurantSchema = new mongoose.Schema({
   description: String,
 });
 
+const MenuPriceSchema = new mongoose.Schema({
+  name: String,
+  price : Number,
+});
+
 const Dish = mongoose.model("Dish", DishSchema);
 const Restaurant = mongoose.model("Restaurant", RestaurantSchema); // <-- hier definierst du das Modell
+const MenuPrice = mongoose.model("DishPrice", MenuPriceSchema); 
 
 async function seed() {
   await Dish.deleteMany({});
   await Restaurant.deleteMany({}); // Modell heißt jetzt "Restaurant", nicht "Restaurants"
+  await MenuPrice.deleteMany({});
 
   await Dish.create([
     { title: "Veggi Döner", ingredients: "Döner mit Halloumi, Salat, Sauce" },
@@ -44,8 +51,15 @@ async function seed() {
     },
   ]);
 
+  await MenuPrice.create([
+    { name: "Döner Classic", price: 5.5 },
+    { name: "Veggie Dürüm", price: 6 },
+    { name: "Lahmacun Roll", price: 5 },
+  ]);
+
   console.log("Seed erfolgreich abgeschlossen.");
   mongoose.connection.close();
 }
+
 
 seed();

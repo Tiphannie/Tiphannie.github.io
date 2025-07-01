@@ -13,6 +13,9 @@ export default function HomePage() {
       <p>
         <Link href="/restaurants">Go to the list of restaurants to rate</Link>
       </p>
+      <p>
+        <Link href="/berlin-doner">Go to the restaurant profile </Link>
+      </p>
     </main>
   );
 }
