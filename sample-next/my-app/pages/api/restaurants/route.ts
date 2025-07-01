@@ -10,7 +10,7 @@ const RestaurantsSchema = new mongoose.Schema({
 const Restaurant = mongoose.models.Dish || mongoose.model("Restaurant", RestaurantsSchema);
 
 export async function GET() {
-  await mongoose.connect("mongodb://localhost:27018/myapp");
-  const dishes = await Restaurant.find();
-  return NextResponse.json(dishes);
+  await mongoose.connect("mongodb://localhost:27017/myapp");
+  const restaurants = await Restaurant.find();
+  return NextResponse.json(restaurants);
 }
