@@ -239,7 +239,7 @@ export default function EditStorePage({ dishes }: { dishes: Dish[] }) {
           type="text"
           value={ingredients}
           onChange={(e) => setIngredients(e.target.value)}
-          style={{ marginBottom: "1rem", width: "100%", padding: "0.5rem" }}
+          style={{ marginBottom: "1rem", width: "80%", padding: "0.5rem" }}
         />
           <button
             type="submit"
@@ -268,7 +268,7 @@ export default function EditStorePage({ dishes }: { dishes: Dish[] }) {
           type="text"
           value={ingredients}
           onChange={(e) => setIngredients(e.target.value)}
-          style={{ marginBottom: "1rem", width: "100%", padding: "0.5rem" }}
+          style={{ marginBottom: "1rem", width: "80%", padding: "0.5rem" }}
         />
           <button
             type="submit"
@@ -284,19 +284,6 @@ export default function EditStorePage({ dishes }: { dishes: Dish[] }) {
             Löschen
           </button>
         </form>
-          {/* <button
-            style={{
-              backgroundColor: "#f44336",
-              color: "white",
-              border: "none",
-              padding: "0.5rem 1rem",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-            onClick={() => handleDelete(title)} // löscht anhand des eingegebenen Titels
-          >
-            Löschen
-          </button> */}
         </div>
       </div>
     </div>
