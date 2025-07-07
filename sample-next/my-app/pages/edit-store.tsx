@@ -232,7 +232,7 @@ export default function EditStorePage({ dishes }: { dishes: Dish[] }) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{ marginBottom: "1rem", width: "100%", padding: "0.5rem" }}
+          style={{ marginBottom: "1rem", width: "80%", padding: "0.5rem" }}
         />
           <input
           placeholder="Zutaten"
@@ -261,7 +261,7 @@ export default function EditStorePage({ dishes }: { dishes: Dish[] }) {
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{ marginBottom: "1rem", width: "100%", padding: "0.5rem" }}
+          style={{ marginBottom: "1rem", width: "80%", padding: "0.5rem" }}
         />
           <input
           placeholder="Zutaten"
