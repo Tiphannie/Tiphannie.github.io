@@ -3,6 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import mongoose from "mongoose";
 
 const DishSchema = new mongoose.Schema({
+  id: String, // or Number, but be consistent!
   title: String,
   ingredients: String,
 });
@@ -17,13 +18,14 @@ async function connectDB() {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connectDB();
-  const { id } = req.query;
+  const { id} = req.query;
 
   switch (req.method) {
     case "GET":
-      const dish = await Dish.findById(id);
-      if (!dish) return res.status(404).json({ error: "Dish not found" });
-      return res.status(200).json(dish);
+  const dishId = Array.isArray(id) ? id[0] : id;
+  const dish = await Dish.findOne({ id: Number(dishId) });
+  if (!dish) return res.status(404).json({ error: "Dish not found" });
+  return res.status(200).json(dish);
 
     case "PUT":
       const { title, ingredients } = req.body;

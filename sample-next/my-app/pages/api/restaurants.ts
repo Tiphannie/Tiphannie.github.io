@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const RestaurantsSchema = new mongoose.Schema({
-  id: String,
+  id: Number,
   name: String,
   description: String,
 });

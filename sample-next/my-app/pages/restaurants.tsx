@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { GetServerSideProps } from "next";
-
-
-type Restaurant = {
+import type { Dish } from "./edit-store";
+export type Restaurant = {
   id: string;
   name: string;
   description: string;
+  dishes?: Dish[]; // Optional dishes array
 };
 
 // This function runs on the server at request time
@@ -116,7 +116,7 @@ export default function RestaurantsPage({ restaurants: initialRestaurants }: { r
           <ul className="restaurant-list">
             {restaurants.map((r) => (
               <li key={r.id} style={{ marginBottom: "1rem" }}>
-                <Link href={`/rate/${r.id}`}>
+                <Link href={`/ratings/rate/${r.id}`}>
                   <strong>{r.name}</strong>
                 </Link>
                 <br />

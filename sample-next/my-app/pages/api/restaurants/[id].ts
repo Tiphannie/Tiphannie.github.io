@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import type { NextApiRequest, NextApiResponse } from "next";
 import mongoose from "mongoose";
 
 const RestaurantsSchema = new mongoose.Schema({
@@ -16,42 +16,51 @@ async function connectDB() {
   }
 }
 
-// GET /api/restaurants/:id — get one restaurant by id
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   await connectDB();
-  const restaurant = await Restaurant.findOne({ id: params.id });
-  if (!restaurant) {
-    return NextResponse.json({ error: "Restaurant not found" }, { status: 404 });
+  const { id } = req.query;
+
+  switch (req.method) {
+    case "GET":
+      try {
+        const restaurant = await Restaurant.findOne({ id });
+        if (!restaurant) {
+          return res.status(404).json({ error: "Restaurant not found" });
+        }
+        return res.status(200).json(restaurant);
+      } catch (error) {
+        return res.status(500).json({ error: "Server error" });
+      }
+
+    case "PUT":
+      try {
+        const { name, description } = req.body;
+        const updatedRestaurant = await Restaurant.findOneAndUpdate(
+          { id },
+          { name, description },
+          { new: true }
+        );
+        if (!updatedRestaurant) {
+          return res.status(404).json({ error: "Restaurant not found" });
+        }
+        return res.status(200).json(updatedRestaurant);
+      } catch (error) {
+        return res.status(500).json({ error: "Server error" });
+      }
+
+    case "DELETE":
+      try {
+        const deleted = await Restaurant.findOneAndDelete({ id });
+        if (!deleted) {
+          return res.status(404).json({ error: "Restaurant not found" });
+        }
+        return res.status(204).end();
+      } catch (error) {
+        return res.status(500).json({ error: "Server error" });
+      }
+
+    default:
+      res.setHeader("Allow", ["GET", "PUT", "DELETE"]);
+      return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-  return NextResponse.json(restaurant);
-}
-
-// PUT /api/restaurants/:id — update a restaurant by id
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
-  await connectDB();
-  const { name, description } = await req.json();
-
-  const updatedRestaurant = await Restaurant.findOneAndUpdate(
-    { id: params.id },
-    { name, description },
-    { new: true }
-  );
-
-  if (!updatedRestaurant) {
-    return NextResponse.json({ error: "Restaurant not found" }, { status: 404 });
-  }
-
-  return NextResponse.json(updatedRestaurant);
-}
-
-// DELETE /api/restaurants/:id — delete a restaurant by id
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
-  await connectDB();
-
-  const deleted = await Restaurant.findOneAndDelete({ id: params.id });
-  if (!deleted) {
-    return NextResponse.json({ error: "Restaurant not found" }, { status: 404 });
-  }
-
-  return new NextResponse(null, { status: 204 }); // No content
 }
