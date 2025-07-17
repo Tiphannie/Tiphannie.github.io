@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
