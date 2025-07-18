@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   await mongoose.connect('mongodb://localhost:27017/myapp');
 
   const menuItems = await MenuPrice.find().lean();
-
+  console.log(menuItems); // add this temporarily
   return {
     props: {
       menuItems: JSON.parse(JSON.stringify(menuItems)),

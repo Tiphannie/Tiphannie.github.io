@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost:27017/myapp");
 
 const DishSchema = new mongoose.Schema({
+  id: Number,
   title: String,
   ingredients: String,
 });
@@ -11,6 +12,7 @@ const RestaurantSchema = new mongoose.Schema({
   id: Number,
   name: String,
   description: String,
+  dishes: [Number], 
 });
 
 const MenuPriceSchema = new mongoose.Schema({
@@ -28,8 +30,8 @@ async function seed() {
   await MenuPrice.deleteMany({});
 
   await Dish.create([
-    { title: "Veggi Döner", ingredients: "Döner mit Halloumi, Salat, Sauce" },
-    { title: "Döner Tüte", ingredients: "Chipstüte mit Dönerfleisch, Sauce, Salat" },
+    { id: 1, title: "Veggi Döner", ingredients: "Döner mit Halloumi, Salat, Sauce" },
+    { id: 2, title: "Döner Tüte", ingredients: "Chipstüte mit Dönerfleisch, Sauce, Salat" },
   ]);
 
   await Restaurant.create([
@@ -38,16 +40,19 @@ async function seed() {
       name: "ALLIM Döner Restaurant",
       description:
         "Klassisch Berliner Hack und Hänchen Döner mit frischen Zutaten und hausgemachten Soßen in Südberlin.",
+      dishes: [1],   
     },
     {
       id: 2,
       name: "Mustafas Gemüse Kebab",
       description: "Miese Touri Falle und Mid Gemüse Döner",
+      dishes: [1],
     },
     {
       id: 3,
       name: "Hamdi Baba Restaurant",
       description: "Traditionell Berliner Hack Döner mit mehreren Filialen in Berlin.",
+      dishes: [2],
     },
   ]);
 

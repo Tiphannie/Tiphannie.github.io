@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import mongoose from 'mongoose';
+import { GetServerSideProps } from "next";
 
 
 export type Dish = {
@@ -13,7 +14,26 @@ const DishSchema = new mongoose.Schema({
   ingredients: String,
 });
 
-const Dishes = mongoose.models.Dishes || mongoose.model('Dishes', DishSchema);
+export const getServerSideProps: GetServerSideProps = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/dishes"); // <--- ACHTUNG: richtige API verwenden
+    const dishes = await res.json();
+
+    return {
+      props: {
+        dishes: Array.isArray(dishes) ? dishes : [],
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        dishes: [],
+      },
+    };
+  }
+};
+
+/* const Dishes = mongoose.models.Dishes || mongoose.model('Dishes', DishSchema);
 
 export const getStaticProps = async () => {
   // Connect to MongoDB (reuse your connection logic if possible)
@@ -27,8 +47,79 @@ export const getStaticProps = async () => {
     },
     revalidate: 10,
   };
-};
+}; */
 export default function EditStorePage({ dishes }: { dishes: Dish[] }) {
+  const [dishList, setDishList] = useState<Dish[]>(dishes || []);
+
+  // Form state
+  const [id, setId] = useState("");
+  const [title, setTitle] = useState("");
+  const [ingredients, setIngredients] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // ✅ POST (neues Gericht hinzufügen)
+  async function handleSubmit(e: React.FormEvent) {
+  e.preventDefault();
+  setError("");
+  setSuccess("");
+  setLoading(true);
+
+  if (!title || !ingredients) {
+    setError("Bitte fülle alle Felder aus.");
+    setLoading(false);
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/dishes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, ingredients }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Fehler beim Hinzufügen");
+    }
+
+    const newDish = await res.json();
+    setSuccess(`Gericht hinzugefügt: ${newDish.title}`);
+    setTitle("");
+    setIngredients("");
+    setDishList((prev) => [...prev, newDish]);
+  } catch (err: any) {
+    setError(err.message);
+  } finally {
+    setLoading(false);
+  }
+}
+
+
+  async function handleDelete(titleToDelete: string) {
+  setError("");
+  setSuccess("");
+
+  try {
+    const res = await fetch("/api/dishes", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: titleToDelete }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || "Failed to delete dish");
+    }
+
+    setDishList((prev) => prev.filter((dish) => dish.title !== titleToDelete));
+    setSuccess("Dish deleted successfully.");
+  } catch (err: any) {
+    setError(err.message);
+  }
+}
+
   
   return (
     <div style={{ backgroundColor: "#252525", minHeight: "100vh", padding: "2rem", color: "black" }}>
@@ -113,12 +204,87 @@ export default function EditStorePage({ dishes }: { dishes: Dish[] }) {
       >
         <h2>Alle Gerichte</h2>
         <ul>
-          {dishes.map((dish) => (
-            <li key={dish._id} style={{ marginBottom: "1rem" }}>
-              <strong>{dish.title}</strong>: {dish.ingredients}
-            </li>
-          ))}
-        </ul>
+        {dishes.map((dish) => (
+          <li key={dish._id} style={{ marginBottom: "1rem" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <strong>{dish.title}</strong>: {dish.ingredients}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      </div>
+
+      <div
+        style={{
+          backgroundColor: "#DEDAD5",
+          margin: "2rem auto",
+          padding: "1rem",
+          borderRadius: "10px",
+          width: "60%",
+        }}
+      >
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+        <form onSubmit={handleSubmit}>
+          <input
+          placeholder="Titel"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          style={{ marginBottom: "1rem", width: "80%", padding: "0.5rem" }}
+        />
+          <input
+          placeholder="Zutaten"
+          type="text"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
+          style={{ marginBottom: "1rem", width: "80%", padding: "0.5rem" }}
+        />
+          <button
+            type="submit"
+            style={{
+              backgroundColor: "#4CAF50",
+              color: "white",
+              border: "none",
+              padding: "0.5rem 1rem",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Hinzufügen
+          </button>
+        </form>
+        <form  onClick={() => handleDelete(title)}>
+          <input
+          placeholder="Titel"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          style={{ marginBottom: "1rem", width: "80%", padding: "0.5rem" }}
+        />
+          <input
+          placeholder="Zutaten"
+          type="text"
+          value={ingredients}
+          onChange={(e) => setIngredients(e.target.value)}
+          style={{ marginBottom: "1rem", width: "80%", padding: "0.5rem" }}
+        />
+          <button
+            type="submit"
+            style={{
+              backgroundColor: "#f44336",
+              color: "white",
+              border: "none",
+              padding: "0.5rem 1rem",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Löschen
+          </button>
+        </form>
+        </div>
       </div>
     </div>
   );

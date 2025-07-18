@@ -1,64 +1,85 @@
-// pages/rate/[id].tsx
-import fs from 'fs';
-import path from 'path';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import React from "react";
+import Link from "next/link";
+import type { Restaurant } from '../../restaurants';
+import type { Dish } from "../../edit-store";
+import { GetServerSideProps } from "next";
 
-type Restaurant = {
-  id: string;
-  name: string;
-  description: string;
+type Props = {
+  restaurant?: Restaurant | null;
+  dishes?: Dish[] | [];
+  error?: string;
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const filePath = path.join(process.cwd(),'src', 'data', 'restaurants.json');
-  const restaurants = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  const paths = restaurants.map((r: Restaurant) => ({
-    params: { id: r.id }
-  }));
-  return { paths, fallback: false };
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+  const { id } = context.params as { id: string };
+
+  try {
+    // 1. Fetch the restaurant
+    const res = await fetch(`http://localhost:3000/api/restaurants/${id}`);
+    if (!res.ok) {
+      return { props: { restaurant: null, error: "Restaurant not found" } };
+    }
+
+    const restaurant: Restaurant = await res.json();
+
+    let dishes: Dish[] = [];
+
+    // 2. Fetch dishes if they exist
+    if (restaurant.dishes && restaurant.dishes.length > 0) {
+      for (const dishId of restaurant.dishes) {
+      const dishRes = await fetch(`http://localhost:3000/api/dishes/${dishId}`);
+      if (dishRes.ok) {
+        dishes.push(await dishRes.json());
+      }
+      }
+      
+    }
+
+    return { props: { restaurant, dishes } };
+  } catch (error: any) {
+    return { props: { restaurant: null, error: error.message || "Error" } };
+  }
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const filePath = path.join(process.cwd(), 'src', 'data', 'restaurants.json');
-  const restaurants = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
-  const restaurant = restaurants.find((r: Restaurant) => r.id === params?.id);
-  return { props: { restaurant } };
-};
+export default function RestaurantPage({ restaurant, dishes, error }: Props) {
+  // You can add delete logic here if needed, similar to before
 
-export default function RatePage({ restaurant }: { restaurant: Restaurant }) {
-  const categories = ['Gesamt', 'Brot', 'Soße', 'Fleisch', 'Salat'];
+  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  if (!restaurant) return <p>Kein Restaurant gefunden.</p>;
 
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: "flex" }}>
       <div className="main-container">
         <div className="header">
-          <div className="header-title">Bewerte "{restaurant.name}"</div>
+          <div className="header-title">Döner Restaurant</div>
           <div className="account-icon">👤</div>
         </div>
-
         <div className="content">
-          {categories.map((label) => (
-            <div className="rating-category" key={label}>
-              <span>{label}:</span>
-              <span className="stars">★★★★★</span>
-            </div>
-          ))}
-
-          <div className="comment-section">
-            <form method="POST" action="#">
-              <label htmlFor="comment"><strong>Kommentar:</strong></label>
-              <textarea id="comment" placeholder="Schreib deinen Eindruck hier rein..." />
-              <button className="submit-btn" type="submit">Absenden</button>
-            </form>
-          </div>
+          <h2>{restaurant.name}</h2>
+          <p>{restaurant.description}</p>
+          {dishes && dishes.length > 0 && (
+            <>
+              <h3>Gerichte:</h3>
+              <ul>
+                {dishes.map((dish) => (
+                  <li key={dish._id}>
+                    <strong>{dish.title}</strong>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       </div>
-
       <div className="sidebar">
         <h3>Menü</h3>
         <ul>
-          <li>Start</li>
-          <li>Bewerten</li>
+          <li>
+            <Link href="/">Start</Link>
+          </li>
+          <li>
+            <Link href="/restaurants">Bewerten</Link>
+          </li>
           <li>Meine Bewertungen</li>
           <li>Logout</li>
         </ul>
