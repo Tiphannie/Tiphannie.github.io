@@ -26,38 +26,38 @@ export default async function handler(req: { body?: any; method?: any; }, res: {
         const restaurants = await Restaurant.find();
         return res.status(200).json(restaurants);
       } catch (error) {
-        return res.status(500).json({ error: "Server error" });
+        return res.status(500).json({ error: "Server error" }as any);
       }
 
     case "POST":
       try {
         const { id, name, description } = req.body;
         if (!id || !name || !description) {
-          return res.status(400).json({ error: "Missing fields" });
+          return res.status(400).json({ error: "Missing fields" }as any);
         }
         const newRestaurant = new Restaurant({ id, name, description });
         await newRestaurant.save();
         return res.status(201).json(newRestaurant);
       } catch (error) {
-        return res.status(500).json({ error: "Server error" });
+        return res.status(500).json({ error: "Server error" }as any);
       }
 
      case "DELETE":
       try {
         const { id } = req.body;
         if (!id) {
-          return res.status(400).json({ error: "Missing restaurant id" });
+          return res.status(400).json({ error: "Missing restaurant id" }as any);
         }
 
         const deleted = await Restaurant.findOneAndDelete({ id });
 
         if (!deleted) {
-          return res.status(404).json({ error: "Restaurant not found" });
+          return res.status(404).json({ error: "Restaurant not found" }as any);
         }
 
-        return res.status(200).json({ message: `Deleted restaurant with id ${id}` });
+        return res.status(200).json({ message: `Deleted restaurant with id ${id}` }as any);
       } catch (error) {
-        return res.status(500).json({ error: "Server error" });
+        return res.status(500).json({ error: "Server error" }as any);
       }
 
     default:

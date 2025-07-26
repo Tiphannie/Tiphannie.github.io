@@ -12,4 +12,8 @@ module.exports = {
   transform: {
     ...tsJestTransformCfg,
   },
+  testMatch: [
+    "**/__tests__/**/*.ts?(x)",
+    "**/?(*.)+(spec|test|e2e).ts?(x)"
+  ],
 };
