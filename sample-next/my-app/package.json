@@ -8,9 +8,7 @@
     "seed": "node seed.js",
     "test": "jest --passWithNoTests"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
+ 
   "keywords": [],
   "author": "",
   "license": "ISC",

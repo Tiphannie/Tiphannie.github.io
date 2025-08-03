@@ -8,9 +8,7 @@
     "start": "next start",
     "test": "jest --passWithNoTests"
   },
-  "jest": {
-    "preset": "@shelf/jest-mongodb"
-  },
+  
   "author": "B. Kleinen",
   "license": "MIT",
   "description": "",
