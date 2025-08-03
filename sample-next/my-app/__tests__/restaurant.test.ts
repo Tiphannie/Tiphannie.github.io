@@ -14,7 +14,7 @@ beforeAll(async () => {
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);
 
-  const app = next({ dev: false });
+  const app = next({ dev: true }); // we use dev mode for testing and changed false o true
   const handle = app.getRequestHandler();
 
   await app.prepare();
