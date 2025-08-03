@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "seed": "node seed.js",
-    "test": "jest --passWithNoTests"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --passWithNoTests"
   },
  
   "keywords": [],
