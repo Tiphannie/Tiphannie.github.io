@@ -1,4 +1,4 @@
-import handler from '@/pages/api/restaurants';
+import handler from '@/pages/api/restaurants/index'; // statt .ts
 import { createMocks } from 'node-mocks-http';
 import mongoose from 'mongoose';
 import { MongoMemoryServer } from 'mongodb-memory-server';

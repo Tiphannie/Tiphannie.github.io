@@ -1,4 +1,3 @@
-/*
 import mongoose from "mongoose";
 
 const RestaurantsSchema = new mongoose.Schema({
@@ -66,4 +65,3 @@ export default async function handler(req: { body?: any; method?: any; }, res: {
       return res.status(405).end(`Method ${method} Not Allowed`);
   }
 }
-*/

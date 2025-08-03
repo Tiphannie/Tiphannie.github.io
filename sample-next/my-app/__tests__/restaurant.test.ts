@@ -14,29 +14,21 @@ beforeAll(async () => {
   const uri = mongoServer.getUri();
   await mongoose.connect(uri);
 
-  const app = next({ dev: true }); // we use dev mode for testing and changed false o true
+  const app = next({ dev: false }); // we use dev mode for testing
   const handle = app.getRequestHandler();
 
   await app.prepare();
 
+  // ⬇️ Hier WARTEN, bis Next.js alles gebaut hat
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
   server = createServer((req, res) => handle(req, res));
-  await new Promise(resolve => server.listen(3001, resolve)); // use 3001 to avoid conflict
+  await new Promise(resolve => server.listen(3001, resolve));
 
   request = supertest('http://localhost:3001');
-  await request.get('/api/restaurants'); // warm-up
+  await request.get('/api/restaurants'); // optional warm-up
+}, 30000);
 
-},30000);
-
-afterAll(async () => {
-  await mongoose.disconnect();
-  await mongoServer.stop();
-
-  if (server && server.close) {
-    await new Promise<void>((resolve, reject) => {
-      server.close((err: any) => (err ? reject(err) : resolve()));
-    });
-  }
-});
 
 describe('E2E /api/restaurants', () => {
   it('GET /api/restaurants health check', async () => {
