@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "test": "jest"
-},
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "jest --passWithNoTests"
+  },
+  "jest": {
+    "preset": "@shelf/jest-mongodb"
+  },
   "author": "B. Kleinen",
   "license": "MIT",
   "description": "",
@@ -21,6 +24,7 @@
     "react": "^19.1.0"
   },
   "devDependencies": {
+    "@shelf/jest-mongodb": "^5.2.2",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.8",
     "@types/react": "^19.1.8",
