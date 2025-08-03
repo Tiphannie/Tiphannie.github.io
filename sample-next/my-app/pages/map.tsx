@@ -11,6 +11,14 @@ const DishSchema = new mongoose.Schema({
 const Dishes = mongoose.models.Dishes || mongoose.model('Dishes', DishSchema);
 
 export const getStaticProps = async () => {
+  // Skip DB connection during CI build
+  if (process.env.CI) {
+    return {
+      props: { dishes: [] },
+      revalidate: 10,
+    };
+  }
+  
   // Connect to MongoDB (reuse your connection logic if possible)
   await mongoose.connect('mongodb://localhost:27017/myapp');
 
