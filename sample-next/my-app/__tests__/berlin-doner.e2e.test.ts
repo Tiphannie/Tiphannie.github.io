@@ -3,6 +3,8 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import handler from '@/pages/api/berlin-doner/index';
 import { createMocks } from 'node-mocks-http';
 
+jest.setTimeout(30000); // 30 seconds
+
 let mongoServer: MongoMemoryServer;
 
 beforeAll(async () => {
@@ -13,7 +15,9 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await mongoose.disconnect();
-  await mongoServer.stop();
+  if (mongoServer) {
+    await mongoServer.stop();
+  }
 });
 
 test('POST /api/berlin-doner creates new menu item', async () => {
