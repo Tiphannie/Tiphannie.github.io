@@ -14,9 +14,13 @@ const DishSchema = new mongoose.Schema({
   ingredients: String,
 });
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+  const host = context.req.headers.host;
+  const baseUrl = `${protocol}://${host}`;
+
   try {
-    const res = await fetch("http://localhost:3000/api/dishes"); // <--- ACHTUNG: richtige API verwenden
+    const res = await fetch(`${baseUrl}/api/dishes`);
     const dishes = await res.json();
 
     return {
