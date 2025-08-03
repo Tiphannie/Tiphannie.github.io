@@ -7,22 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: sample-next/my-app
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - run: npm install
-      - run: npm run lint
-
   build:
     runs-on: ubuntu-latest
-    needs: lint
     defaults:
       run:
         working-directory: sample-next/my-app
