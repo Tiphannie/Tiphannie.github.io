@@ -21,9 +21,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: sample-next/my-app
 
       - name: Build project
         run: npm run build
+        working-directory: sample-next/my-app
 
   systemtest:
     runs-on: ubuntu-latest
@@ -40,6 +42,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: sample-next/my-app
 
       - name: Run system tests
         run: npm test
+        working-directory: sample-next/my-app
